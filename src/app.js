@@ -4,34 +4,99 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const path = require('path');
 const fs = require('fs');
+const { spawn } = require('child_process');
 require('dotenv').config();
 
 const logger = require('./utils/logger');
 const { sequelize } = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
 
-// 检查系统是否已安装
-const checkSystemInstalled = () => {
+// 自动安装系统
+const autoInstallSystem = () => {
+  return new Promise((resolve, reject) => {
+    console.log('\n=== 检测到系统未安装，正在启动自动安装流程 ===\n');
+    
+    // 使用spawn运行安装脚本
+    const installProcess = spawn('node', ['scripts/install.js'], {
+      cwd: path.join(__dirname, '..'),
+      stdio: 'inherit' // 继承父进程的stdio，这样可以看到安装过程的交互
+    });
+    
+    installProcess.on('close', (code) => {
+      if (code === 0) {
+        console.log('\n=== 自动安装完成 ===\n');
+        resolve();
+      } else {
+        reject(new Error(`安装进程退出，退出码: ${code}`));
+      }
+    });
+    
+    installProcess.on('error', (error) => {
+      reject(new Error(`安装进程启动失败: ${error.message}`));
+    });
+  });
+};
+
+// 检查系统是否已安装，如果未安装则自动安装
+const checkAndInstallSystem = async () => {
   const configPath = path.join(__dirname, '../config/system.json');
+  
+  // 检查配置文件是否存在
   if (!fs.existsSync(configPath)) {
     console.log('\n=== 抽奖系统首次启动 ===');
-    console.log('请先运行安装脚本：npm run install-system');
+    console.log('系统配置文件不存在，将自动进入安装流程...');
     console.log('========================\n');
-    process.exit(1);
+    
+    try {
+      await autoInstallSystem();
+      // 安装完成后重新检查
+      return checkAndInstallSystem();
+    } catch (error) {
+      console.error('自动安装失败:', error.message);
+      console.log('\n请手动运行安装脚本：npm run install-system');
+      process.exit(1);
+    }
   }
   
-  const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  if (!config.installed) {
-    console.log('\n=== 系统未完成安装 ===');
-    console.log('请运行安装脚本：npm run install-system');
-    console.log('===================\n');
-    process.exit(1);
+  // 检查安装状态
+  try {
+    const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+    if (!config.installed) {
+      console.log('\n=== 系统未完成安装 ===');
+      console.log('检测到安装未完成，将自动重新安装...');
+      console.log('===================\n');
+      
+      try {
+        await autoInstallSystem();
+        // 安装完成后重新检查
+        return checkAndInstallSystem();
+      } catch (error) {
+        console.error('自动安装失败:', error.message);
+        console.log('\n请手动运行安装脚本：npm run install-system');
+        process.exit(1);
+      }
+    }
+    
+    console.log('\n=== 系统已安装，正在启动服务 ===\n');
+  } catch (error) {
+    console.error('读取系统配置文件失败:', error.message);
+    console.log('配置文件可能损坏，将重新安装...');
+    
+    try {
+      await autoInstallSystem();
+      // 安装完成后重新检查
+      return checkAndInstallSystem();
+    } catch (installError) {
+      console.error('自动安装失败:', installError.message);
+      console.log('\n请手动运行安装脚本：npm run install-system');
+      process.exit(1);
+    }
   }
 };
 
 const createApp = async () => {
-  // 检查安装状态
-  checkSystemInstalled();
+  // 检查安装状态，如果未安装则自动安装
+  await checkAndInstallSystem();
   
   const app = express();
   
@@ -127,4 +192,4 @@ createApp().catch(error => {
   process.exit(1);
 });
 
-module.exports = createApp; 
+module.exports = createApp;

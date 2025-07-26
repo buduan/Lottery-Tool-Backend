@@ -31,15 +31,17 @@
 ### 2. 安装依赖
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### 3. 系统初始化
 
-首次使用需要运行安装脚本：
+初次启动时，将会自动进入安装程序，引导您完成数据库配置、管理员账户创建等步骤。
+
+若安装失败，您可以使用自动化安装脚本：
 
 ```bash
-npm run install-system
+pnpm run install-system
 ```
 
 安装脚本将引导您：
@@ -52,10 +54,10 @@ npm run install-system
 
 ```bash
 # 生产模式
-npm start
+pnpm start
 
 # 开发模式
-npm run dev
+pnpm dev
 ```
 
 ### 5. 测试API
@@ -63,7 +65,7 @@ npm run dev
 运行自动化测试确保系统正常工作：
 
 ```bash
-npm test
+pnpm test
 ```
 
 ## 抽奖码格式支持
@@ -79,7 +81,7 @@ npm test
 | `12_digit_alphanumeric` | 12位数字+字母 | 12a34B56c78D |
 
 ## API使用示例
-
+具体请参考API文档
 ### 管理员登录
 
 ```bash
@@ -194,7 +196,7 @@ backend-2/
 └── README.md
 ```
 
-## 环境变量
+## 环境变量 ENV
 
 系统运行时需要以下环境变量（安装脚本会自动生成）：
 
@@ -220,38 +222,13 @@ LOG_FILE=logs/app.log
 ```
 
 ## 开发说明
-
 ### 添加新的抽奖码格式
 
 1. 在 `src/utils/lotteryCodeGenerator.js` 中添加新格式
 2. 更新验证规则
 3. 更新API文档
 
-### 添加新的API接口
-
-1. 在相应的路由文件中添加路由
-2. 添加必要的验证和中间件
-3. 更新API文档
-4. 在测试脚本中添加测试用例
-
 ## 故障排除
-
-### 常见问题
-
-1. **数据库连接失败**
-   - 检查MySQL服务是否启动
-   - 验证数据库连接配置
-   - 确保数据库用户有足够权限
-
-2. **JWT Token错误**
-   - 检查JWT_SECRET配置
-   - 确保token格式正确
-   - 验证token是否过期
-
-3. **抽奖码格式错误**
-   - 检查活动的抽奖码格式设置
-   - 验证抽奖码是否符合指定格式
-
 ### 日志查看
 
 ```bash
