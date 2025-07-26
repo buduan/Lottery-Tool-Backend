@@ -1,0 +1,702 @@
+2025-07-25 22:50:54 [INFO]: 数据库连接成功
+2025-07-25 22:50:54 [INFO]: 服务器已启动，端口: 3000
+2025-07-25 22:50:54 [INFO]: API文档: http://localhost:3000/api
+2025-07-25 22:50:54 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-25 22:50:59 [INFO]: GET / - ::1
+2025-07-25 22:50:59 [INFO]: GET /favicon.ico - ::1
+2025-07-26 22:57:26 [INFO]: 数据库连接成功
+2025-07-26 22:57:27 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:57:27 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:57:27 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:57:27 [INFO]: 数据库连接成功
+2025-07-26 22:57:27 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:57:27 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:57:27 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:58:44 [INFO]: 数据库连接成功
+2025-07-26 22:58:44 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:58:44 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:58:44 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:58:46 [INFO]: 数据库连接成功
+2025-07-26 22:58:46 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:58:46 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:58:46 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:58:56 [INFO]: 数据库连接成功
+2025-07-26 22:58:56 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:58:56 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:58:56 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:59:27 [INFO]: 数据库连接成功
+2025-07-26 22:59:27 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:59:27 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:59:27 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 22:59:27 [INFO]: 数据库连接成功
+2025-07-26 22:59:27 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 22:59:27 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 22:59:27 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 23:00:32 [INFO]: 数据库连接成功
+2025-07-26 23:00:32 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 23:00:32 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 23:00:32 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 23:00:34 [INFO]: 数据库连接成功
+2025-07-26 23:00:34 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 23:00:34 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 23:00:34 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 23:00:59 [INFO]: 数据库连接成功
+2025-07-26 23:00:59 [INFO]: 服务器已启动，端口: 3000
+2025-07-26 23:00:59 [INFO]: API文档: http://localhost:3000/api
+2025-07-26 23:00:59 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-26 23:03:52 [INFO]: GET /health - ::1
+2025-07-26 23:03:52 [INFO]: POST /api/auth/login - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: 用户名或密码错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:54:13
+2025-07-26 23:03:52 [INFO]: GET /api/auth/me - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+2025-07-26 23:03:52 [INFO]: POST /api/admin/activities - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/admin/activities - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/overview - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/health - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/config - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/users - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: POST /api/system/users - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/users/2 - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/system/logs - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/admin/lottery-records/stats/overview - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: GET /api/admin/lottery-records - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:03:52 [INFO]: DELETE /api/system/users/2 - ::1
+2025-07-26 23:03:52 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:37 [INFO]: 数据库连接成功
+2025-07-26 23:04:47 [INFO]: GET /health - ::1
+2025-07-26 23:04:47 [INFO]: POST /api/auth/login - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: 用户名或密码错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:54:13
+2025-07-26 23:04:48 [INFO]: GET /api/auth/me - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+2025-07-26 23:04:48 [INFO]: POST /api/admin/activities - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/admin/activities - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/overview - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/health - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/config - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/users - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: POST /api/system/users - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/users/2 - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/system/logs - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/admin/lottery-records/stats/overview - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: GET /api/admin/lottery-records - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:04:48 [INFO]: DELETE /api/system/users/2 - ::1
+2025-07-26 23:04:48 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:35:19)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-26 23:05:28 [INFO]: POST /api/auth/login - ::1
+2025-07-26 23:05:28 [ERROR]: CustomError: 用户名或密码错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:54:13
+2025-07-27 00:32:52 [INFO]: 数据库连接成功
+2025-07-27 00:32:52 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 00:32:52 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 00:32:52 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-27 00:33:37 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:39 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:39 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:40 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:47 [INFO]: 数据库连接成功
+2025-07-27 00:33:47 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 00:33:47 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 00:33:47 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-27 00:33:55 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:56 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:56 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:57 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:57 [INFO]: POST /auth/login - ::1
+2025-07-27 00:33:58 [INFO]: POST /auth/login - ::1
+2025-07-27 00:34:02 [INFO]: POST /auth/register - ::1
+2025-07-27 00:34:03 [INFO]: POST /auth/register - ::1
+2025-07-27 00:34:07 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:34:29 [INFO]: POST /api/auth/login - ::1
+2025-07-27 00:34:54 [INFO]: POST /api/auth/login - ::1
+2025-07-27 00:36:00 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:36:00 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-27 00:36:01 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:36:01 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-27 00:36:02 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:36:02 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-27 00:36:03 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:36:03 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-27 00:36:03 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:36:03 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:328:13)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:286:9
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+2025-07-27 00:38:48 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:38:51 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 00:50:45 [INFO]: GET /api/lottery/activities/ - ::1
+2025-07-27 00:50:46 [INFO]: GET /api/lottery/activities/ - ::1
+2025-07-27 00:51:08 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:51:09 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:51:09 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:51:10 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:52:11 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 00:52:21 [INFO]: POST /auth/register - ::1
+2025-07-27 00:52:22 [INFO]: POST /api/auth/register - ::1
+2025-07-27 00:52:22 [ERROR]: CustomError: Token无效或已过期
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at authenticateToken (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/middleware/auth.js:14:13)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/index.js:175:3)
+2025-07-27 01:22:03 [INFO]: POST /auth/login - ::1
+2025-07-27 01:22:05 [INFO]: POST /auth/login - ::1
+2025-07-27 01:22:09 [INFO]: POST /auth/login - ::1
+2025-07-27 01:22:15 [INFO]: 数据库连接成功
+2025-07-27 01:22:15 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 01:22:15 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 01:22:15 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-27 01:22:19 [INFO]: POST /api/auth/login - ::1
+2025-07-27 01:23:15 [INFO]: GET /auth/me - ::1
+2025-07-27 01:23:20 [INFO]: GET /auth/me - ::1
+2025-07-27 01:23:22 [INFO]: GET /auth/me - ::1
+2025-07-27 01:23:22 [INFO]: GET /auth/me - ::1
+2025-07-27 01:23:23 [INFO]: GET /auth/me - ::1
+2025-07-27 01:23:29 [INFO]: GET /api/auth/me - ::1
+2025-07-27 01:23:34 [INFO]: POST /api/auth/register - ::1
+2025-07-27 01:23:34 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:16:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:23:35 [INFO]: POST /api/auth/register - ::1
+2025-07-27 01:23:35 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:16:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:23:45 [INFO]: POST /api/auth/register - ::1
+2025-07-27 01:23:45 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/auth.js:16:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:23:50 [INFO]: GET /system/users?page&limit&search&role&status - ::1
+2025-07-27 01:23:56 [INFO]: GET /system/users?page&limit&search&role&status - ::1
+2025-07-27 01:23:56 [INFO]: GET /system/users?page&limit&search&role&status - ::1
+2025-07-27 01:23:58 [INFO]: GET /api/system/users?page&limit&search&role&status - ::1
+2025-07-27 01:24:23 [INFO]: GET /api/system/users?page=1&limit=10&search&role&status - ::1
+2025-07-27 01:24:27 [INFO]: GET /api/system/users?page=1&limit=10&search&role=admin&status - ::1
+2025-07-27 01:24:34 [INFO]: GET /api/system/users?page=1&limit=10&search&role=admin&status=active - ::1
+2025-07-27 01:24:37 [INFO]: GET /api/system/users?page=1&limit=10&search&role=admin - ::1
+2025-07-27 01:24:41 [INFO]: GET /api/system/users?page=1&limit=10&search&role=super_admin - ::1
+2025-07-27 01:24:53 [INFO]: GET /admin/activities?page&limit&search&status - ::1
+2025-07-27 01:24:58 [INFO]: GET /admin/activities?page&limit&search&status - ::1
+2025-07-27 01:25:00 [INFO]: GET /admin/activities?page&limit&search&status - ::1
+2025-07-27 01:25:01 [INFO]: GET /api/admin/activities?page&limit&search&status - ::1
+2025-07-27 01:25:01 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:25:02 [INFO]: GET /api/admin/activities?page&limit&search&status - ::1
+2025-07-27 01:25:02 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:25:11 [INFO]: GET /api/admin/activities?page=1&limit=10&status - ::1
+2025-07-27 01:25:11 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:25:12 [INFO]: GET /api/admin/activities?page=1&limit=10&status - ::1
+2025-07-27 01:25:12 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:25:18 [INFO]: GET /api/admin/activities?page=1&limit=10&status=active - ::1
+2025-07-27 01:25:28 [INFO]: POST /admin/activities - ::1
+2025-07-27 01:25:29 [INFO]: POST /admin/activities - ::1
+2025-07-27 01:25:50 [INFO]: POST /api/admin/activities - ::1
+2025-07-27 01:25:55 [INFO]: GET /api/admin/activities?page=1&limit=10&status=active - ::1
+2025-07-27 01:25:56 [INFO]: GET /api/admin/activities?page=1&limit=10&status=active - ::1
+2025-07-27 01:26:00 [INFO]: GET /api/admin/activities?page=1&limit=10&status=draft - ::1
+2025-07-27 01:26:47 [INFO]: GET /api/admin/activities?page=1&limit=10&status=draft - ::1
+2025-07-27 01:27:06 [INFO]: GET /lottery/activities/ - ::1
+2025-07-27 01:29:09 [INFO]: POST /admin/activities/1/prizes - ::1
+2025-07-27 01:29:16 [INFO]: POST /admin/activities/1/prizes - ::1
+2025-07-27 01:29:18 [INFO]: POST /api/admin/activities/1/prizes - ::1
+2025-07-27 01:30:01 [INFO]: POST /admin/activities//lottery-codes - ::1
+2025-07-27 01:30:22 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:30:22 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:30:24 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:30:24 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:30:49 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:30:49 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:30:50 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:30:50 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:03 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:03 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:04 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:04 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:04 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:04 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:13 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:13 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:14 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:14 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:21 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:21 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:22 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:22 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:27 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:27 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:33 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:33 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:35 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:31:35 [ERROR]: CustomError: 参数格式错误
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at validateRequest (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/admin/activities.js:17:17)
+    at Layer.handle [as handle_request] (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express@4.21.2/node_modules/express/lib/router/route.js:149:13)
+    at middleware (/Users/buduan/Projects/Lottery-Tool-2/backend-2/node_modules/.pnpm/express-validator@7.2.1/node_modules/express-validator/lib/middlewares/check.js:16:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:31:40 [INFO]: POST /api/admin/activities/1/lottery-codes - ::1
+2025-07-27 01:32:08 [INFO]: POST /api/lottery/activities/1/offline-draw - ::1
+2025-07-27 01:32:16 [INFO]: POST /api/lottery/activities/1/offline-draw - ::1
+2025-07-27 01:32:16 [ERROR]: CustomError: 抽奖码已使用
+    at createError (/Users/buduan/Projects/Lottery-Tool-2/backend-2/src/utils/customError.js:48:10)
+    at /Users/buduan/Projects/Lottery-Tool-2/backend-2/src/routes/lottery.js:236:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-07-27 01:32:35 [INFO]: POST /admin/activities/1/lottery-codes/batch - ::1
+2025-07-27 01:32:46 [INFO]: POST /api/admin/activities/1/lottery-codes/batch - ::1
+2025-07-27 01:38:17 [INFO]: 数据库连接成功
+2025-07-27 01:38:17 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 01:38:17 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 01:38:17 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-27 02:00:36 [INFO]: 数据库连接成功
+2025-07-27 02:00:36 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 02:00:36 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 02:00:36 [INFO]: 健康检查: http://localhost:3000/health

@@ -1,0 +1,14 @@
+{
+  "installed": true,
+  "installTime": "2025-07-26T15:07:05.844Z",
+  "version": "1.0.0",
+  "database": {
+    "host": "localhost",
+    "port": "3306",
+    "name": "lottery_system"
+  },
+  "superAdmin": {
+    "username": "buduan",
+    "email": "buduan461@gmail.com"
+  }
+}

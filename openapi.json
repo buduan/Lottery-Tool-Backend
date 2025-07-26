@@ -1,0 +1,2221 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "抽奖系统后端API",
+    "description": "一个支持多种抽奖模式的完整抽奖系统API，包含认证、活动管理、参与者管理、抽奖功能、系统管理等模块。",
+    "version": "1.0.0",
+    "contact": {
+      "name": "开发团队",
+      "email": "buduan461@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "开发环境"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "webhookAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Webhook Token"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "用户ID"
+          },
+          "username": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "description": "用户名"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "邮箱"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["super_admin", "admin"],
+            "description": "用户角色"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "inactive"],
+            "description": "账户状态"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          }
+        }
+      },
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "活动ID"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "活动名称"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "活动描述"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["draft", "active", "ended"],
+            "description": "活动状态"
+          },
+          "lottery_mode": {
+            "type": "string",
+            "enum": ["offline", "online"],
+            "description": "抽奖模式"
+          },
+          "start_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "开始时间"
+          },
+          "end_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "结束时间"
+          },
+          "settings": {
+            "type": "object",
+            "properties": {
+              "max_lottery_codes": {
+                "type": "integer",
+                "minimum": 1,
+                "description": "最大抽奖码数量"
+              },
+              "lottery_code_format": {
+                "type": "string",
+                "enum": ["4_digit_number", "8_digit_number", "8_digit_alphanumeric", "12_digit_number", "12_digit_alphanumeric"],
+                "description": "抽奖码格式"
+              },
+              "allow_duplicate_phone": {
+                "type": "boolean",
+                "description": "是否允许重复手机号"
+              }
+            }
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          }
+        }
+      },
+      "Prize": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "奖品ID"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100,
+            "description": "奖品名称"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 500,
+            "description": "奖品描述"
+          },
+          "total_quantity": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "奖品总数量"
+          },
+          "remaining_quantity": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "剩余数量"
+          },
+          "probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1,
+            "description": "中奖概率"
+          },
+          "sort_order": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "排序值"
+          }
+        }
+      },
+      "LotteryCode": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "抽奖码ID"
+          },
+          "code": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 50,
+            "description": "抽奖码"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["unused", "used"],
+            "description": "使用状态"
+          },
+          "participant_info": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100,
+                "description": "参与者姓名"
+              },
+              "phone": {
+                "type": "string",
+                "description": "手机号"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "邮箱"
+              }
+            }
+          },
+          "used_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "使用时间"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          }
+        }
+      },
+      "LotteryRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "抽奖记录ID"
+          },
+          "is_winner": {
+            "type": "boolean",
+            "description": "是否中奖"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "抽奖时间"
+          },
+          "lottery_code": {
+            "$ref": "#/components/schemas/LotteryCode"
+          },
+          "prize": {
+            "$ref": "#/components/schemas/Prize"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "当前页码"
+          },
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "每页数量"
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "总记录数"
+          },
+          "totalPages": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "总页数"
+          }
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "请求是否成功"
+          },
+          "data": {
+            "type": "object",
+            "description": "响应数据"
+          },
+          "message": {
+            "type": "string",
+            "description": "响应消息"
+          }
+        },
+        "required": ["success"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "错误代码"
+              },
+              "message": {
+                "type": "string",
+                "description": "错误描述"
+              },
+              "details": {
+                "type": "string",
+                "description": "详细错误信息"
+              }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "未认证",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "ForbiddenError": {
+        "description": "权限不足",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "资源不存在",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      },
+      "ValidationError": {
+        "description": "请求参数错误",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "tags": ["认证模块"],
+        "summary": "用户登录",
+        "description": "用户登录获取访问令牌",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 50,
+                    "description": "用户名"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "description": "密码"
+                  }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "登录成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "token": {
+                              "type": "string",
+                              "description": "JWT访问令牌"
+                            },
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": ["认证模块"],
+        "summary": "创建新管理员账户",
+        "description": "创建新管理员账户（仅超级管理员可操作）",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "用户名"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "邮箱"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)",
+                    "description": "密码（必须包含字母和数字）"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": ["admin", "super_admin"],
+                    "description": "用户角色"
+                  }
+                },
+                "required": ["username", "email", "password", "role"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "用户创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": ["认证模块"],
+        "summary": "获取当前用户信息",
+        "description": "获取当前登录用户的信息",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      }
+    },
+    "/auth/password": {
+      "put": {
+        "tags": ["认证模块"],
+        "summary": "修改当前用户密码",
+        "description": "修改当前用户密码",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "old_password": {
+                    "type": "string",
+                    "description": "原密码"
+                  },
+                  "new_password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)",
+                    "description": "新密码（必须包含字母和数字）"
+                  }
+                },
+                "required": ["old_password", "new_password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "密码修改成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      }
+    },
+    "/lottery/activities/{id}": {
+      "get": {
+        "tags": ["抽奖模块"],
+        "summary": "获取活动抽奖信息",
+        "description": "获取活动抽奖信息（公开接口）",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activity": {
+                              "$ref": "#/components/schemas/Activity"
+                            },
+                            "prizes": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Prize"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/lottery/activities/{id}/draw": {
+      "post": {
+        "tags": ["抽奖模块"],
+        "summary": "用户使用抽奖码参与线上抽奖",
+        "description": "用户使用抽奖码参与线上抽奖",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lottery_code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "抽奖码"
+                  },
+                  "participant_info": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100,
+                        "description": "参与者姓名"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "description": "手机号"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "邮箱"
+                      }
+                    },
+                    "required": ["name", "phone"]
+                  }
+                },
+                "required": ["lottery_code", "participant_info"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "抽奖成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_record": {
+                              "$ref": "#/components/schemas/LotteryRecord"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/lottery/activities/{id}/offline-draw": {
+      "post": {
+        "tags": ["抽奖模块"],
+        "summary": "管理员使用抽奖码进行线下抽奖",
+        "description": "管理员使用抽奖码进行线下抽奖",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lottery_code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "抽奖码"
+                  }
+                },
+                "required": ["lottery_code"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "抽奖成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_record": {
+                              "$ref": "#/components/schemas/LotteryRecord"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/system/users": {
+      "get": {
+        "tags": ["系统管理模块"],
+        "summary": "获取用户列表",
+        "description": "获取系统用户列表",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索关键词",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "description": "用户角色",
+            "schema": {
+              "type": "string",
+              "enum": ["admin", "super_admin"]
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "用户状态",
+            "schema": {
+              "type": "string",
+              "enum": ["active", "inactive"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "users": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/User"
+                              }
+                            },
+                            "pagination": {
+                              "$ref": "#/components/schemas/Pagination"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["系统管理模块"],
+        "summary": "创建用户",
+        "description": "创建新用户",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "用户名"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "邮箱"
+                  },
+                  "password": {
+                    "type": "string",
+                    "minLength": 6,
+                    "pattern": "^(?=.*[A-Za-z])(?=.*\\d)",
+                    "description": "密码（必须包含字母和数字）"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": ["admin", "super_admin"],
+                    "description": "用户角色"
+                  }
+                },
+                "required": ["username", "email", "password", "role"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "用户创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      }
+    },
+    "/system/users/{id}": {
+      "get": {
+        "tags": ["系统管理模块"],
+        "summary": "获取用户详情",
+        "description": "获取用户详情",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "用户ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "put": {
+        "tags": ["系统管理模块"],
+        "summary": "更新用户信息",
+        "description": "更新用户信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "用户ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 50,
+                    "pattern": "^[a-zA-Z0-9_]+$",
+                    "description": "用户名"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "邮箱"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": ["admin", "super_admin"],
+                    "description": "用户角色"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["active", "inactive"],
+                    "description": "用户状态"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "user": {
+                              "$ref": "#/components/schemas/User"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/admin/activities": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取活动列表",
+        "description": "获取当前用户创建的活动列表",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索关键词",
+            "schema": {
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "活动状态",
+            "schema": {
+              "type": "string",
+              "enum": ["draft", "active", "ended"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activities": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Activity"
+                              }
+                            },
+                            "pagination": {
+                              "$ref": "#/components/schemas/Pagination"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "创建新活动",
+        "description": "创建新的抽奖活动",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "活动名称"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "活动描述"
+                  },
+                  "lottery_mode": {
+                    "type": "string",
+                    "enum": ["offline", "online"],
+                    "description": "抽奖模式"
+                  },
+                  "start_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "结束时间"
+                  },
+                  "settings": {
+                    "type": "object",
+                    "properties": {
+                      "max_lottery_codes": {
+                        "type": "integer",
+                        "minimum": 1,
+                        "description": "最大抽奖码数量"
+                      },
+                      "lottery_code_format": {
+                        "type": "string",
+                        "enum": ["4_digit_number", "8_digit_number", "8_digit_alphanumeric", "12_digit_number", "12_digit_alphanumeric"],
+                        "description": "抽奖码格式"
+                      },
+                      "allow_duplicate_phone": {
+                        "type": "boolean",
+                        "description": "是否允许重复手机号"
+                      }
+                    }
+                  }
+                },
+                "required": ["name", "lottery_mode"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "活动创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activity": {
+                              "$ref": "#/components/schemas/Activity"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      }
+    },
+    "/admin/activities/{id}": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取活动详情",
+        "description": "获取指定活动的详细信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activity": {
+                              "allOf": [
+                                {
+                                  "$ref": "#/components/schemas/Activity"
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "lottery_codes_count": {
+                                      "type": "integer",
+                                      "description": "抽奖码总数"
+                                    },
+                                    "prizes": {
+                                      "type": "array",
+                                      "items": {
+                                        "$ref": "#/components/schemas/Prize"
+                                      }
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "put": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "更新活动信息",
+        "description": "更新指定活动的信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "活动名称"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 1000,
+                    "description": "活动描述"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["draft", "active", "ended"],
+                    "description": "活动状态"
+                  },
+                  "start_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "开始时间"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "结束时间"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activity": {
+                              "$ref": "#/components/schemas/Activity"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "删除活动",
+        "description": "删除指定活动（仅限草稿状态）",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "删除成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/admin/activities/{id}/lottery-codes": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取活动的抽奖码列表",
+        "description": "获取指定活动的抽奖码列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "搜索关键词",
+            "schema": {
+              "type": "string",
+              "maxLength": 100
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "使用状态",
+            "schema": {
+              "type": "string",
+              "enum": ["unused", "used"]
+            }
+          },
+          {
+            "name": "has_participant_info",
+            "in": "query",
+            "description": "是否有参与者信息",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_codes": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/LotteryCode"
+                              }
+                            },
+                            "pagination": {
+                              "$ref": "#/components/schemas/Pagination"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "单个添加抽奖码",
+        "description": "为活动添加单个抽奖码",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "抽奖码"
+                  },
+                  "participant_info": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100,
+                        "description": "参与者姓名"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "description": "手机号"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "邮箱"
+                      }
+                    }
+                  }
+                },
+                "required": ["code"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "抽奖码添加成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_code": {
+                              "$ref": "#/components/schemas/LotteryCode"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/admin/activities/{id}/lottery-codes/batch": {
+      "post": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "批量创建抽奖码",
+        "description": "为活动批量创建抽奖码",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 1000,
+                    "description": "创建数量"
+                  }
+                },
+                "required": ["count"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "批量创建成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "created_count": {
+                              "type": "integer",
+                              "description": "成功创建的数量"
+                            },
+                            "lottery_codes": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/LotteryCode"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/admin/activities/{id}/webhook-info": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取活动的Webhook接口信息",
+        "description": "获取活动的Webhook接口信息",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "webhook_url": {
+                              "type": "string",
+                              "description": "Webhook URL"
+                            },
+                            "webhook_token": {
+                              "type": "string",
+                              "description": "Webhook Token"
+                            },
+                            "activity_id": {
+                              "type": "string",
+                              "description": "活动Webhook ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/admin/activities/{id}/prizes": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取指定活动的奖品列表",
+        "description": "获取指定活动的奖品列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "prizes": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Prize"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      },
+      "post": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "为活动添加奖品",
+        "description": "为活动添加奖品",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 100,
+                    "description": "奖品名称"
+                  },
+                  "description": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "奖品描述"
+                  },
+                  "total_quantity": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "奖品总数量"
+                  },
+                  "probability": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1,
+                    "description": "中奖概率"
+                  },
+                  "sort_order": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "description": "排序值"
+                  }
+                },
+                "required": ["name", "total_quantity", "probability"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "奖品添加成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "prize": {
+                              "$ref": "#/components/schemas/Prize"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/webhook/activities/{webhook_id}/lottery-codes": {
+      "post": {
+        "tags": ["Webhook模块"],
+        "summary": "通过Webhook添加抽奖码",
+        "description": "通过Webhook为活动添加抽奖码",
+        "security": [
+          {
+            "webhookAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "webhook_id",
+            "in": "path",
+            "required": true,
+            "description": "Webhook ID",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lottery_codes": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "code": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 50,
+                          "description": "抽奖码"
+                        },
+                        "participant_info": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "minLength": 1,
+                              "maxLength": 100,
+                              "description": "参与者姓名"
+                            },
+                            "phone": {
+                              "type": "string",
+                              "description": "手机号"
+                            },
+                            "email": {
+                              "type": "string",
+                              "format": "email",
+                              "description": "邮箱"
+                            }
+                          }
+                        }
+                      },
+                      "required": ["code"]
+                    },
+                    "minItems": 1,
+                    "maxItems": 100
+                  }
+                },
+                "required": ["lottery_codes"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "抽奖码添加成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "created_count": {
+                              "type": "integer",
+                              "description": "成功创建的抽奖码数量"
+                            },
+                            "failed_count": {
+                              "type": "integer",
+                              "description": "创建失败的抽奖码数量"
+                            },
+                            "failed_codes": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              },
+                              "description": "创建失败的抽奖码列表"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "认证模块",
+      "description": "用户认证相关接口"
+    },
+    {
+      "name": "管理员模块 - 活动管理",
+      "description": "管理员活动管理相关接口"
+    },
+    {
+      "name": "管理员模块 - 奖品管理",
+      "description": "管理员奖品管理相关接口"
+    },
+    {
+      "name": "管理员模块 - 抽奖码管理",
+      "description": "管理员抽奖码管理相关接口"
+    },
+    {
+      "name": "抽奖模块",
+      "description": "抽奖相关接口"
+    },
+    {
+      "name": "系统管理模块",
+      "description": "系统管理相关接口"
+    },
+    {
+      "name": "Webhook模块",
+      "description": "Webhook相关接口"
+    }
+  ]
+}
