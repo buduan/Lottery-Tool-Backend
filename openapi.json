@@ -752,84 +752,6 @@
         }
       }
     },
-    "/lottery/activities/{id}/offline-draw": {
-      "post": {
-        "tags": ["抽奖模块"],
-        "summary": "管理员使用抽奖码进行线下抽奖",
-        "description": "管理员使用抽奖码进行线下抽奖",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "description": "活动ID",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "lottery_code": {
-                    "type": "string",
-                    "minLength": 1,
-                    "maxLength": 50,
-                    "description": "抽奖码"
-                  }
-                },
-                "required": ["lottery_code"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "抽奖成功",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/ApiResponse"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "lottery_record": {
-                              "$ref": "#/components/schemas/LotteryRecord"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "400": {
-            "$ref": "#/components/responses/ValidationError"
-          },
-          "401": {
-            "$ref": "#/components/responses/UnauthorizedError"
-          },
-          "403": {
-            "$ref": "#/components/responses/ForbiddenError"
-          },
-          "404": {
-            "$ref": "#/components/responses/NotFoundError"
-          }
-        }
-      }
-    },
     "/system/users": {
       "get": {
         "tags": ["系统管理模块"],
@@ -1843,6 +1765,205 @@
         }
       }
     },
+    "/admin/activities/{id}/lottery-codes/{code}/invalidate": {
+      "put": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "管理员作废单个抽奖码",
+        "description": "管理员作废指定活动下的单个抽奖码",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "抽奖码",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "reason": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "作废原因"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "作废成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_code": {
+                              "$ref": "#/components/schemas/LotteryCode"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/admin/activities/{id}/lottery-codes/batch-invalidate": {
+      "put": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "管理员批量作废抽奖码",
+        "description": "管理员批量作废指定活动下的抽奖码",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "maxItems": 100,
+                    "description": "要作废的抽奖码列表"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "作废原因"
+                  }
+                },
+                "required": ["codes"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "批量作废成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "invalidated_count": {
+                              "type": "integer",
+                              "description": "成功作废的数量"
+                            },
+                            "failed_codes": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "description": "抽奖码"
+                                  },
+                                  "reason": {
+                                    "type": "string",
+                                    "description": "失败原因"
+                                  }
+                                }
+                              },
+                              "description": "作废失败的抽奖码列表"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/admin/activities/{id}/webhook-info": {
       "get": {
         "tags": ["管理员模块 - 活动管理"],
@@ -2064,6 +2185,586 @@
         }
       }
     },
+    "/lottery/activities/{id}/offline-draw": {
+      "post": {
+        "tags": ["抽奖模块"],
+        "summary": "管理员线下抽奖",
+        "description": "管理员使用抽奖码进行线下抽奖",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "lottery_code": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 50,
+                    "description": "抽奖码"
+                  },
+                  "prize_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "指定奖品ID（可选，不指定则按概率抽奖）"
+                  }
+                },
+                "required": ["lottery_code"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "抽奖成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "is_winner": {
+                              "type": "boolean",
+                              "description": "是否中奖"
+                            },
+                            "prize": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "奖品ID"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "奖品名称"
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "description": "奖品描述"
+                                }
+                              },
+                              "description": "中奖奖品信息（仅中奖时返回）"
+                            },
+                            "lottery_record": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "抽奖记录ID"
+                                },
+                                "created_at": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "抽奖时间"
+                                }
+                              }
+                            },
+                            "lottery_code": {
+                              "type": "object",
+                              "properties": {
+                                "code": {
+                                  "type": "string",
+                                  "description": "抽奖码"
+                                },
+                                "participant_info": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string",
+                                      "description": "参与者姓名"
+                                    },
+                                    "phone": {
+                                      "type": "string",
+                                      "description": "手机号"
+                                    },
+                                    "email": {
+                                      "type": "string",
+                                      "description": "邮箱"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/lottery-codes/query": {
+      "get": {
+        "tags": ["抽奖码模块"],
+        "summary": "查询抽奖码信息",
+        "description": "根据抽奖码查询详细信息",
+        "security": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "description": "抽奖码",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "query",
+            "description": "活动ID（可选）",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "查询成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "lottery_code": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "抽奖码ID"
+                                },
+                                "code": {
+                                  "type": "string",
+                                  "description": "抽奖码"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "enum": ["unused", "used"],
+                                  "description": "使用状态"
+                                },
+                                "participant_name": {
+                                  "type": "string",
+                                  "description": "参与者姓名"
+                                },
+                                "participant_email": {
+                                  "type": "string",
+                                  "description": "参与者邮箱"
+                                },
+                                "participant_phone": {
+                                  "type": "string",
+                                  "description": "参与者手机号"
+                                },
+                                "created_at": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "创建时间"
+                                }
+                              }
+                            },
+                            "activity": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "活动ID"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "活动名称"
+                                },
+                                "status": {
+                                  "type": "string",
+                                  "description": "活动状态"
+                                },
+                                "lottery_mode": {
+                                  "type": "string",
+                                  "description": "抽奖模式"
+                                },
+                                "start_time": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "开始时间"
+                                },
+                                "end_time": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "description": "结束时间"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/lottery-codes/validate/{code}": {
+      "get": {
+        "tags": ["抽奖码模块"],
+        "summary": "验证抽奖码",
+        "description": "验证抽奖码是否有效",
+        "security": [],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "path",
+            "required": true,
+            "description": "抽奖码",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          {
+            "name": "activity_id",
+            "in": "query",
+            "description": "活动ID（可选）",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "验证完成",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "valid": {
+                              "type": "boolean",
+                              "description": "是否有效"
+                            },
+                            "message": {
+                              "type": "string",
+                              "description": "验证结果消息"
+                            },
+                            "lottery_code": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "抽奖码ID"
+                                },
+                                "code": {
+                                  "type": "string",
+                                  "description": "抽奖码"
+                                },
+                                "participant_name": {
+                                  "type": "string",
+                                  "description": "参与者姓名"
+                                },
+                                "participant_email": {
+                                  "type": "string",
+                                  "description": "参与者邮箱"
+                                },
+                                "participant_phone": {
+                                  "type": "string",
+                                  "description": "参与者手机号"
+                                }
+                              },
+                              "description": "抽奖码信息（仅有效时返回）"
+                            },
+                            "activity": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "description": "活动ID"
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "description": "活动名称"
+                                }
+                              },
+                              "description": "活动信息（仅有效时返回）"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          }
+        }
+      }
+    },
+    "/lottery-codes/stats/{activity_id}": {
+      "get": {
+        "tags": ["抽奖码模块"],
+        "summary": "获取活动抽奖码统计",
+        "description": "获取指定活动的抽奖码统计信息",
+        "security": [],
+        "parameters": [
+          {
+            "name": "activity_id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "activity_id": {
+                              "type": "integer",
+                              "description": "活动ID"
+                            },
+                            "total_codes": {
+                              "type": "integer",
+                              "description": "总抽奖码数"
+                            },
+                            "used_codes": {
+                              "type": "integer",
+                              "description": "已使用抽奖码数"
+                            },
+                            "unused_codes": {
+                              "type": "integer",
+                              "description": "未使用抽奖码数"
+                            },
+                            "invalid_codes": {
+                              "type": "integer",
+                              "description": "已作废抽奖码数"
+                            },
+                            "usage_rate": {
+                              "type": "integer",
+                              "description": "使用率（百分比）"
+                            },
+                            "invalid_rate": {
+                              "type": "integer",
+                              "description": "作废率（百分比）"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
+    "/lottery-codes/batch-validate": {
+      "post": {
+        "tags": ["抽奖码模块"],
+        "summary": "批量验证抽奖码",
+        "description": "批量验证多个抽奖码的有效性",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "codes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 1,
+                    "maxItems": 100,
+                    "description": "抽奖码数组"
+                  },
+                  "activity_id": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "description": "活动ID（可选）"
+                  }
+                },
+                "required": ["codes"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "验证完成",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "results": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "code": {
+                                    "type": "string",
+                                    "description": "抽奖码"
+                                  },
+                                  "valid": {
+                                    "type": "boolean",
+                                    "description": "是否有效"
+                                  },
+                                  "message": {
+                                    "type": "string",
+                                    "description": "验证结果消息"
+                                  },
+                                  "lottery_code_id": {
+                                    "type": "integer",
+                                    "description": "抽奖码ID（仅有效时返回）"
+                                  },
+                                  "participant_name": {
+                                    "type": "string",
+                                    "description": "参与者姓名（仅有效时返回）"
+                                  },
+                                  "participant_email": {
+                                    "type": "string",
+                                    "description": "参与者邮箱（仅有效时返回）"
+                                  },
+                                  "participant_phone": {
+                                    "type": "string",
+                                    "description": "参与者手机号（仅有效时返回）"
+                                  }
+                                }
+                              }
+                            },
+                            "summary": {
+                              "type": "object",
+                              "properties": {
+                                "total": {
+                                  "type": "integer",
+                                  "description": "总数"
+                                },
+                                "valid": {
+                                  "type": "integer",
+                                  "description": "有效数量"
+                                },
+                                "invalid": {
+                                  "type": "integer",
+                                  "description": "无效数量"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ValidationError"
+          }
+        }
+      }
+    },
+
+
     "/webhook/activities/{webhook_id}/lottery-codes": {
       "post": {
         "tags": ["Webhook模块"],
@@ -2208,6 +2909,10 @@
     {
       "name": "抽奖模块",
       "description": "抽奖相关接口"
+    },
+    {
+      "name": "抽奖码模块",
+      "description": "抽奖码查询和验证相关接口"
     },
     {
       "name": "系统管理模块",

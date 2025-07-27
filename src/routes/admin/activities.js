@@ -559,6 +559,182 @@ async (req, res, next) => {
 });
 
 /**
+ * @route   PUT /api/admin/activities/:id/lottery-codes/:code/invalidate
+ * @desc    管理员作废抽奖码
+ * @access  Private (Admin)
+ */
+router.put('/:id/lottery-codes/:code/invalidate', [
+  body('reason').optional().isString().isLength({ max: 500 }).withMessage('作废原因不能超过500字符')
+], 
+validateRequest,
+logLotteryCodeOperation(OperationLog.OPERATION_TYPES.INVALIDATE_LOTTERY_CODE),
+async (req, res, next) => {
+  try {
+    const activityId = req.params.id;
+    const { code } = req.params;
+    const { reason } = req.body;
+
+    // 验证活动存在且有权限
+    const activity = await Activity.findByPk(activityId);
+    if (!activity) {
+      throw createError('BUSINESS_ACTIVITY_NOT_FOUND');
+    }
+
+    if (req.user.role !== 'super_admin' && activity.created_by !== req.user.id) {
+      throw createError('AUTH_INSUFFICIENT_PERMISSION', '只能管理自己创建的活动');
+    }
+
+    const lotteryCode = await LotteryCode.findOne({
+      where: {
+        code: code,
+        activity_id: activityId
+      },
+      include: [
+        {
+          model: Activity,
+          as: 'activity',
+          attributes: ['id', 'name', 'status']
+        }
+      ]
+    });
+
+    if (!lotteryCode) {
+      throw createError('BUSINESS_LOTTERY_CODE_NOT_FOUND', '抽奖码不存在');
+    }
+
+    // 检查抽奖码当前状态
+    if (lotteryCode.status === 'invalid') {
+      throw createError('VALIDATION_INVALID_FORMAT', '抽奖码已经作废');
+    }
+
+    // 标记为作废
+    await lotteryCode.markAsInvalid();
+
+    res.json({
+      success: true,
+      message: '抽奖码作废成功',
+      data: {
+        lottery_code: {
+          id: lotteryCode.id,
+          code: lotteryCode.code,
+          status: lotteryCode.status,
+          activity_id: lotteryCode.activity_id,
+          activity_name: lotteryCode.activity.name,
+          reason: reason || '管理员作废',
+          invalidated_at: new Date()
+        }
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @route   PUT /api/admin/activities/:id/lottery-codes/batch-invalidate
+ * @desc    管理员批量作废抽奖码
+ * @access  Private (Admin)
+ */
+router.put('/:id/lottery-codes/batch-invalidate', [
+  body('codes').isArray({ min: 1, max: 100 }).withMessage('抽奖码数组不能为空且最多100个'),
+  body('codes.*').isString().isLength({ min: 1 }).withMessage('抽奖码不能为空'),
+  body('reason').optional().isString().isLength({ max: 500 }).withMessage('作废原因不能超过500字符')
+], 
+validateRequest,
+logLotteryCodeOperation(OperationLog.OPERATION_TYPES.BATCH_INVALIDATE_LOTTERY_CODE),
+async (req, res, next) => {
+  try {
+    const activityId = req.params.id;
+    const { codes, reason } = req.body;
+
+    // 验证活动存在且有权限
+    const activity = await Activity.findByPk(activityId);
+    if (!activity) {
+      throw createError('BUSINESS_ACTIVITY_NOT_FOUND');
+    }
+
+    if (req.user.role !== 'super_admin' && activity.created_by !== req.user.id) {
+      throw createError('AUTH_INSUFFICIENT_PERMISSION', '只能管理自己创建的活动');
+    }
+
+    const { Op } = require('sequelize');
+    const lotteryCodes = await LotteryCode.findAll({
+      where: {
+        code: { [Op.in]: codes },
+        activity_id: activityId
+      },
+      include: [
+        {
+          model: Activity,
+          as: 'activity',
+          attributes: ['id', 'name', 'status']
+        }
+      ]
+    });
+
+    const results = [];
+    const invalidatedCodes = [];
+
+    for (const code of codes) {
+      const lotteryCode = lotteryCodes.find(lc => lc.code === code);
+      
+      if (!lotteryCode) {
+        results.push({
+          code,
+          success: false,
+          message: '抽奖码不存在'
+        });
+        continue;
+      }
+
+      if (lotteryCode.status === 'invalid') {
+        results.push({
+          code,
+          success: false,
+          message: '抽奖码已经作废'
+        });
+        continue;
+      }
+
+      try {
+        await lotteryCode.markAsInvalid();
+        results.push({
+          code,
+          success: true,
+          message: '作废成功',
+          lottery_code_id: lotteryCode.id,
+          activity_name: lotteryCode.activity.name
+        });
+        invalidatedCodes.push(code);
+      } catch (error) {
+        results.push({
+          code,
+          success: false,
+          message: error.message
+        });
+      }
+    }
+
+    res.json({
+      success: true,
+      message: `批量作废完成，成功作废${invalidatedCodes.length}个抽奖码`,
+      data: {
+        results,
+        summary: {
+          total: codes.length,
+          success: results.filter(r => r.success).length,
+          failed: results.filter(r => !r.success).length,
+          reason: reason || '管理员批量作废',
+          invalidated_codes: invalidatedCodes
+        }
+      }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
  * @route   GET /api/admin/activities/:id/prizes
  * @desc    获取指定活动的奖品列表
  * @access  Private (Admin)
@@ -666,4 +842,4 @@ async (req, res, next) => {
   }
 });
 
-module.exports = router; 
+module.exports = router;
