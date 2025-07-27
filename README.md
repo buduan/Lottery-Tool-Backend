@@ -1,88 +1,92 @@
-# 抽奖系统后端
+# Lottery System Backend
 
-一个支持多种抽奖模式的完整抽奖系统后端服务，基于 Node.js + Express.js + MySQL 构建。
+🌍 [中文版](README_zh.md) | English
 
-## 功能特点
+A complete lottery system backend service supporting multiple lottery modes, built with Node.js + Express.js + MySQL.
+Provides OpenAPI-compliant JSON protocol documentation for easy API viewing and testing by frontend developers.
 
-- 🎯 **多种抽奖模式**：支持线上抽奖和线下抽奖
-- 🔐 **权限管理**：超级管理员和普通管理员角色
-- 🎫 **抽奖码系统**：支持多种格式的抽奖码生成
-- 🔗 **Webhook支持**：第三方系统可通过Webhook添加抽奖码
-- 📊 **完整统计**：详细的抽奖记录和统计数据
-- 🛡️ **安全可靠**：JWT认证、操作日志、错误处理
+## Features
 
-## 技术栈
+- 🎯 **Multiple Lottery Modes**: Supports online and offline lottery
+- 🔐 **Permission Management**: Super admin and regular admin roles
+- 🎫 **Lottery Code System**: Supports multiple lottery code generation formats
+- 🔗 **Webhook Support**: Third-party systems can add lottery codes via Webhook
+- 📊 **Complete Statistics**: Detailed lottery records and statistical data
+- 🛡️ **Secure & Reliable**: JWT authentication, operation logs, error handling
 
-- **后端框架**：Node.js + Express.js
-- **数据库**：MySQL 8.0+
-- **ORM**：Sequelize
-- **认证**：JWT
-- **日志**：Winston
-- **验证**：express-validator
+## Tech Stack
 
-## 安装和使用
+- **Backend Framework**: Node.js + Express.js
+- **Database**: MySQL 8.0+
+- **ORM**: Sequelize
+- **Authentication**: JWT
+- **Logging**: Winston
+- **Validation**: express-validator
 
-### 1. 环境要求
+## Installation and Usage
+
+### 1. Requirements
 
 - Node.js >= 16.0.0
 - MySQL >= 8.0
-- npm 或 yarn
+- npm or yarn
 
-### 2. 安装依赖
+### 2. Install Dependencies
 
 ```bash
 pnpm install
 ```
 
-### 3. 系统初始化
+### 3. System Initialization
 
-初次启动时，将会自动进入安装程序，引导您完成数据库配置、管理员账户创建等步骤。
+On first startup, the system will automatically enter the installation program to guide you through database configuration, admin account creation, and other setup steps.
 
-若安装失败，您可以使用自动化安装脚本：
+If installation fails, you can use the automated installation script:
 
 ```bash
 pnpm run install-system
 ```
 
-安装脚本将引导您：
-- 配置数据库连接
-- 创建数据库和表结构
-- 设置超级管理员账户
-- 生成配置文件
+The installation script will guide you through:
+- Configuring database connection
+- Creating database and table structure
+- Setting up super admin account
+- Generating configuration files
 
-### 4. 启动服务
+### 4. Start Service
 
 ```bash
-# 生产模式
+# Production mode
 pnpm start
 
-# 开发模式
+# Development mode
 pnpm dev
 ```
 
-### 5. 测试API
+### 5. Test API
 
-运行自动化测试确保系统正常工作：
+Run automated tests to ensure the system works properly:
 
 ```bash
 pnpm test
 ```
 
-## 抽奖码格式支持
+## Lottery Code Format Support
 
-系统支持以下抽奖码格式：
+The system supports the following lottery code formats:
 
-| 格式代码 | 描述 | 示例 |
-|---------|------|------|
-| `4_digit_number` | 4位纯数字 | 1234 |
-| `8_digit_number` | 8位纯数字 | 12345678 |
-| `8_digit_alphanumeric` | 8位数字+小写字母 | 12a34b56 |
-| `12_digit_number` | 12位纯数字 | 123456789012 |
-| `12_digit_alphanumeric` | 12位数字+字母 | 12a34B56c78D |
+| Format Code | Description | Example |
+|-------------|-------------|----------|
+| `4_digit_number` | 4-digit numbers only | 1234 |
+| `8_digit_number` | 8-digit numbers only | 12345678 |
+| `8_digit_alphanumeric` | 8-digit numbers + lowercase letters | 12a34b56 |
+| `12_digit_number` | 12-digit numbers only | 123456789012 |
+| `12_digit_alphanumeric` | 12-digit numbers + letters | 12a34B56c78D |
 
-## API使用示例
-具体请参考API文档
-### 管理员登录
+## API Usage Examples
+Please refer to the API documentation. OpenAPI protocol is provided, and you can import `openapi.json` into Swagger UI or other API tools for testing.
+
+### Admin Login
 
 ```bash
 curl -X POST http://localhost:3000/api/auth/login \
@@ -93,15 +97,15 @@ curl -X POST http://localhost:3000/api/auth/login \
   }'
 ```
 
-### 创建活动
+### Create Activity
 
 ```bash
 curl -X POST http://localhost:3000/api/admin/activities \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_TOKEN" \
   -d '{
-    "name": "春节抽奖活动",
-    "description": "新春佳节，好礼相送",
+    "name": "Spring Festival Lottery",
+    "description": "Spring Festival celebration with great prizes",
     "lottery_mode": "online",
     "start_time": "2024-02-01T00:00:00.000Z",
     "end_time": "2024-02-15T23:59:59.000Z",
@@ -112,7 +116,7 @@ curl -X POST http://localhost:3000/api/admin/activities \
   }'
 ```
 
-### 批量创建抽奖码
+### Batch Create Lottery Codes
 
 ```bash
 curl -X POST http://localhost:3000/api/admin/activities/1/lottery-codes/batch \
@@ -123,7 +127,7 @@ curl -X POST http://localhost:3000/api/admin/activities/1/lottery-codes/batch \
   }'
 ```
 
-### 用户抽奖
+### User Lottery Draw
 
 ```bash
 curl -X POST http://localhost:3000/api/lottery/activities/1/draw \
@@ -133,16 +137,16 @@ curl -X POST http://localhost:3000/api/lottery/activities/1/draw \
   }'
 ```
 
-## Webhook集成
+## Webhook Integration
 
-### 获取Webhook信息
+### Get Webhook Information
 
 ```bash
 curl -X GET http://localhost:3000/api/admin/activities/1/webhook-info \
   -H "Authorization: Bearer YOUR_TOKEN"
 ```
 
-### 通过Webhook添加抽奖码
+### Add Lottery Codes via Webhook
 
 ```bash
 curl -X POST http://localhost:3000/api/webhook/activities/WEBHOOK_ID/lottery-codes \
@@ -151,106 +155,106 @@ curl -X POST http://localhost:3000/api/webhook/activities/WEBHOOK_ID/lottery-cod
   -d '{
     "code": "87654321",
     "participant_info": {
-      "name": "张三",
+      "name": "John Doe",
       "phone": "13800138000",
       "email": "zhangsan@example.com"
     }
   }'
 ```
 
-## 目录结构
+## Directory Structure
 
 ```
 backend-2/
 ├── src/
-│   ├── app.js                 # 应用入口
+│   ├── app.js                 # Application entry
 │   ├── config/
-│   │   └── database.js        # 数据库配置
+│   │   └── database.js        # Database configuration
 │   ├── middleware/
-│   │   ├── auth.js           # 认证中间件
-│   │   ├── errorHandler.js   # 错误处理
-│   │   └── operationLogger.js # 操作日志
-│   ├── models/               # 数据模型
+│   │   ├── auth.js           # Authentication middleware
+│   │   ├── errorHandler.js   # Error handling
+│   │   └── operationLogger.js # Operation logging
+│   ├── models/               # Data models
 │   │   ├── User.js
 │   │   ├── Activity.js
 │   │   ├── Prize.js
 │   │   ├── LotteryCode.js
 │   │   ├── LotteryRecord.js
 │   │   └── OperationLog.js
-│   ├── routes/               # 路由
-│   │   ├── auth.js          # 认证路由
-│   │   ├── admin/           # 管理员路由
-│   │   ├── lottery.js       # 抽奖路由
-│   │   ├── webhook.js       # Webhook路由
-│   │   └── system.js        # 系统管理路由
-│   └── utils/               # 工具函数
+│   ├── routes/               # Routes
+│   │   ├── auth.js          # Authentication routes
+│   │   ├── admin/           # Admin routes
+│   │   ├── lottery.js       # Lottery routes
+│   │   ├── webhook.js       # Webhook routes
+│   │   └── system.js        # System management routes
+│   └── utils/               # Utility functions
 │       ├── logger.js
 │       ├── customError.js
 │       └── lotteryCodeGenerator.js
 ├── scripts/
-│   ├── install.js           # 安装脚本
-│   └── test-apis.js         # API测试脚本
-├── logs/                    # 日志文件
-├── config/                  # 配置文件
+│   ├── install.js           # Installation script
+│   └── test-apis.js         # API testing script
+├── logs/                    # Log files
+├── config/                  # Configuration files
 ├── package.json
 └── README.md
 ```
 
-## 环境变量 ENV
+## Environment Variables
 
-系统运行时需要以下环境变量（安装脚本会自动生成）：
+The system requires the following environment variables at runtime (automatically generated by installation script):
 
 ```env
-# 服务器配置
+# Server configuration
 PORT=3000
 NODE_ENV=production
 
-# 数据库配置
+# Database configuration
 DB_HOST=localhost
 DB_PORT=3306
 DB_NAME=lottery_system
 DB_USER=root
 DB_PASSWORD=your_password
 
-# JWT配置
+# JWT configuration
 JWT_SECRET=your_secret_key
 JWT_EXPIRES_IN=24h
 
-# 日志配置
+# Logging configuration
 LOG_LEVEL=info
 LOG_FILE=logs/app.log
 ```
 
-## 开发说明
-### 添加新的抽奖码格式
+## Development Notes
+### Adding New Lottery Code Formats
 
-1. 在 `src/utils/lotteryCodeGenerator.js` 中添加新格式
-2. 更新验证规则
-3. 更新API文档
+1. Add new format in `src/utils/lotteryCodeGenerator.js`
+2. Update validation rules
+3. Update API documentation
 
-## 故障排除
-### 日志查看
+## Troubleshooting
+### View Logs
 
 ```bash
-# 查看应用日志
+# View application logs
 tail -f logs/app.log
 
-# 查看错误日志
+# View error logs
 tail -f logs/error.log
 ```
 
-## 贡献指南
+## Contributing
 
-1. Fork 项目
-2. 创建功能分支
-3. 提交更改
-4. 推送到分支
-5. 创建 Pull Request
+1. Fork the project
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
-## 许可证
+## License
 
 MIT License
 
-## 联系方式
+## Contact
 
-如有问题或建议，请联系开发团队。 
+For questions or suggestions, please contact the development team.

@@ -256,6 +256,10 @@ graph TD
 
 * `POST /api/admin/activities/:id/lottery-codes/import` - 批量导入抽奖码
 
+* `PUT /api/admin/activities/:id/lottery-codes/:code/invalidate` - 作废抽奖码
+
+* `PUT /api/admin/activities/:id/lottery-codes/batch-invalidate` - 批量作废抽奖码
+
 * `PUT /api/admin/lottery-codes/:id/participant-info` - 修改抽奖码参与者信息
 
 * `GET /api/admin/activities/:id/webhook-info` - 获取Webhook接口信息
