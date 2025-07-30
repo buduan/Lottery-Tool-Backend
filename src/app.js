@@ -99,7 +99,7 @@ const createApp = async () => {
   await checkAndInstallSystem();
   
   const app = express();
-  
+
   // 安全中间件
   app.use(helmet());
   app.use(cors({
@@ -144,12 +144,12 @@ const createApp = async () => {
   }
   
   // 路由
-  app.use('/api/auth', require('./routes/auth'));
-  app.use('/api/admin', require('./routes/admin'));
-  app.use('/api/lottery', require('./routes/lottery'));
-  app.use('/api/lottery-codes', require('./routes/lotteryCode'));
-  app.use('/api/webhook', require('./routes/webhook'));
-  app.use('/api/system', require('./routes/system'));
+  app.use('/auth', require('./routes/auth'));
+  app.use('/admin', require('./routes/admin'));
+  app.use('/lottery', require('./routes/lottery'));
+  app.use('/lottery-codes', require('./routes/lotteryCode'));
+  app.use('/webhook', require('./routes/webhook'));
+  app.use('/system', require('./routes/system'));
   
   // 健康检查
   app.get('/health', (req, res) => {
@@ -179,10 +179,9 @@ const createApp = async () => {
   app.use(errorHandler);
   
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    logger.info(`服务器已启动，端口: ${PORT}`);
-    logger.info(`API文档: http://localhost:${PORT}/api`);
-    logger.info(`健康检查: http://localhost:${PORT}/health`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.info(`服务器已启动，端口: ${PORT}`);
+    console.info(`健康检查: http://localhost:${PORT}/health`);
   });
 };
 

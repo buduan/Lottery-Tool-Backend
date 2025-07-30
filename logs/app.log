@@ -700,3 +700,27 @@
 2025-07-27 02:00:36 [INFO]: 服务器已启动，端口: 3000
 2025-07-27 02:00:36 [INFO]: API文档: http://localhost:3000/api
 2025-07-27 02:00:36 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-27 23:03:47 [INFO]: 数据库连接成功
+2025-07-27 23:03:47 [INFO]: 服务器已启动，端口: 3000
+2025-07-27 23:03:47 [INFO]: API文档: http://localhost:3000/api
+2025-07-27 23:03:47 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-30 21:46:06 [INFO]: 数据库连接成功
+2025-07-30 21:46:06 [INFO]: 服务器已启动，端口: 3000
+2025-07-30 21:46:06 [INFO]: API文档: http://localhost:3000/api
+2025-07-30 21:46:06 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-30 21:47:46 [INFO]: 数据库连接成功
+2025-07-30 21:47:46 [INFO]: 服务器已启动，端口: 3000
+2025-07-30 21:47:46 [INFO]: API文档: http://localhost:3000/api
+2025-07-30 21:47:46 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-30 21:48:35 [INFO]: GET / - ::1
+2025-07-30 21:48:39 [INFO]: GET /apple-touch-icon-precomposed.png - ::1
+2025-07-30 21:48:39 [INFO]: GET /apple-touch-icon.png - ::1
+2025-07-30 21:48:39 [INFO]: GET /favicon.ico - ::1
+2025-07-30 21:48:39 [INFO]: GET / - ::1
+2025-07-30 21:52:10 [INFO]: 数据库连接成功
+2025-07-30 21:52:10 [INFO]: 服务器已启动，端口: 3000
+2025-07-30 21:52:10 [INFO]: API文档: http://localhost:3000/api
+2025-07-30 21:52:10 [INFO]: 健康检查: http://localhost:3000/health
+2025-07-30 21:52:23 [INFO]: 数据库连接成功
+2025-07-30 21:52:26 [INFO]: GET /api - ::1
+2025-07-30 21:52:32 [INFO]: GET /health - ::1
