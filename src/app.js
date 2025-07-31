@@ -7,9 +7,15 @@ const fs = require('fs');
 const { spawn } = require('child_process');
 require('dotenv').config();
 
-const logger = require('./utils/logger');
 const { sequelize } = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
+
+// 检查是否在Docker环境中
+const isDockerEnvironment = () => {
+  return process.env.DOCKER_ENV === 'true' || 
+         process.env.NODE_ENV === 'production' ||
+         fs.existsSync('/.dockerenv');
+};
 
 // 自动安装系统
 const autoInstallSystem = () => {
@@ -39,6 +45,17 @@ const autoInstallSystem = () => {
 
 // 检查系统是否已安装，如果未安装则自动安装
 const checkAndInstallSystem = async () => {
+  // 在Docker环境中跳过自动安装
+  if (isDockerEnvironment()) {
+    console.log('\n=== Docker环境检测到，跳过自动安装 ===\n');
+    console.log('请确保系统已正确配置，包括：');
+    console.log('1. 数据库连接配置');
+    console.log('2. 系统配置文件 (config/system.json)');
+    console.log('3. 环境变量设置');
+    console.log('=====================================\n');
+    return;
+  }
+
   const configPath = path.join(__dirname, '../config/system.json');
   
   // 检查配置文件是否存在
@@ -127,20 +144,26 @@ const createApp = async () => {
   
   // 日志中间件
   app.use((req, res, next) => {
-    logger.info(`${req.method} ${req.url} - ${req.ip}`);
+    console.info(`${req.method} ${req.url} - ${req.ip}`);
     next();
   });
   
   // 数据库连接
   try {
     await sequelize.authenticate();
-    logger.info('数据库连接成功');
+    console.info('数据库连接成功');
     
     // 导入模型关联
     require('./models');
   } catch (error) {
-    logger.error('数据库连接失败:', error);
-    process.exit(1);
+    console.error('数据库连接失败:', error);
+    // 在Docker环境中，如果数据库连接失败，不要立即退出
+    if (isDockerEnvironment()) {
+      console.log('数据库连接失败，但应用将继续启动...');
+      console.log('请检查数据库配置和环境变量');
+    } else {
+      process.exit(1);
+    }
   }
   
   // 路由
@@ -187,7 +210,7 @@ const createApp = async () => {
 
 // 启动应用
 createApp().catch(error => {
-  logger.error('应用启动失败:', error);
+  console.error('应用启动失败:', error);
   process.exit(1);
 });
 
