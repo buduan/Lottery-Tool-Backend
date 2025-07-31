@@ -225,6 +225,107 @@ LOG_LEVEL=info
 LOG_FILE=logs/app.log
 ```
 
+## Docker 部署说明
+
+### 问题解决
+
+之前的 `ELIFECYCLE Command failed with exit code 1` 错误是因为应用在Docker环境中尝试运行交互式安装脚本，但Docker容器是非交互式的。
+
+### 解决方案
+
+#### 1. 修改了应用启动逻辑
+
+- 在Docker环境中自动跳过交互式安装
+- 添加了Docker环境检测
+- 数据库连接失败时不会立即退出应用
+
+#### 2. 使用方法
+
+**方法一：使用Docker Compose（推荐）**
+
+1. 修改 `docker-compose.yml` 中的数据库配置：
+
+```yaml
+environment:
+  DB_HOST: your-actual-database-host
+  DB_USER: your-actual-db-user
+  DB_PASSWORD: your-actual-db-password
+```
+
+2. 启动服务：
+
+```bash
+docker-compose up -d
+```
+
+3. 查看日志：
+
+```bash
+docker-compose logs -f lottery-backend
+```
+
+**方法二：单独使用Docker**
+
+1. 构建镜像：
+
+```bash
+docker build -t lottery-backend .
+```
+
+2. 运行容器（需要设置环境变量）：
+
+```bash
+docker run -d \
+  --name lottery-backend \
+  -p 3000:3000 \
+  -e DB_HOST=your-database-host \
+  -e DB_USER=your-db-user \
+  -e DB_PASSWORD=your-db-password \
+  -e JWT_SECRET=your-jwt-secret \
+  lottery-backend
+```
+
+#### 3. 环境变量说明
+
+必需的环境变量：
+
+- `DB_HOST`: 数据库主机地址
+- `DB_USER`: 数据库用户名
+- `DB_PASSWORD`: 数据库密码
+- `DB_NAME`: 数据库名称（可选，默认：lottery_system）
+- `JWT_SECRET`: JWT密钥
+
+可选的环境变量：
+
+- `DB_PORT`: 数据库端口（默认：3306）
+- `PORT`: 应用端口（默认：3000）
+- `NODE_ENV`: 环境（默认：production）
+- `CORS_ORIGIN`: CORS来源（默认：*）
+
+#### 4. 测试部署
+
+启动后，可以通过以下方式测试：
+
+```bash
+# 健康检查
+curl http://localhost:3000/health
+
+# 查看容器状态
+docker ps
+
+# 查看日志
+docker logs lottery-backend
+```
+
+#### 5. 故障排除
+
+如果容器仍然启动失败：
+
+1. 检查环境变量是否正确设置
+2. 确保数据库服务可访问
+3. 查看详细日志：`docker logs lottery-backend`
+
+
 ## 开发说明
 ### 添加新的抽奖码格式
 
