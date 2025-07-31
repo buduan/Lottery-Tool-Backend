@@ -167,11 +167,6 @@ dist/
 # PM2 files
 ecosystem.config.js
 
-# Docker files (optional)
-.dockerignore
-Dockerfile
-docker-compose.yml
-
 # SSL certificates
 *.pem
 *.key

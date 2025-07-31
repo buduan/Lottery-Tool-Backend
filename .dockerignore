@@ -1,0 +1,13 @@
+node_modules
+logs
+tests
+*.log
+coverage
+.git
+.gitignore
+Dockerfile
+.dockerignore
+README.md
+README_zh.md
+*.zip
+.env* 

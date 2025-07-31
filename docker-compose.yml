@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  lottery-backend:
+    build: .
+    container_name: lottery-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      # 数据库配置 - 请根据你的实际数据库配置修改
+      DB_HOST: your-database-host
+      DB_PORT: 3306
+      DB_NAME: lottery_system
+      DB_USER: your-db-user
+      DB_PASSWORD: your-db-password
+      
+      # JWT配置
+      JWT_SECRET: your-super-secret-jwt-key-change-in-production
+      JWT_EXPIRES_IN: 24h
+      
+      # 应用配置
+      NODE_ENV: production
+      PORT: 3000
+      CORS_ORIGIN: "*"
+      
+      # Docker环境标识
+      DOCKER_ENV: true
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s 
