@@ -49,6 +49,7 @@ const Prize = sequelize.define('Prize', {
   probability: {
     type: DataTypes.DECIMAL(5, 4),
     allowNull: false,
+    defaultValue: 0,
     validate: {
       min: 0,
       max: 1
@@ -83,7 +84,8 @@ const Prize = sequelize.define('Prize', {
       }
       
       // 验证单个奖品概率不超过1
-      if (prize.probability > 1) {
+      const currentProbability = parseFloat(prize.probability || 0);
+      if (currentProbability > 1) {
         throw new Error('奖品概率不能超过1');
       }
       
@@ -94,8 +96,9 @@ const Prize = sequelize.define('Prize', {
       });
       
       const totalProbability = existingPrizes.reduce((sum, existingPrize) => {
-        return sum + parseFloat(existingPrize.probability);
-      }, 0) + parseFloat(prize.probability);
+        const p = parseFloat(existingPrize.probability || 0);
+        return sum + (isNaN(p) ? 0 : p);
+      }, 0) + (isNaN(currentProbability) ? 0 : currentProbability);
       
       if (totalProbability > 1) {
         throw new Error(`添加此奖品后，活动概率总和将超过1（当前总和：${totalProbability.toFixed(4)}）`);
@@ -112,7 +115,8 @@ const Prize = sequelize.define('Prize', {
       // 如果概率发生变化，进行验证
       if (prize.changed('probability')) {
         // 验证单个奖品概率不超过1
-        if (prize.probability > 1) {
+        const currentProbability = parseFloat(prize.probability || 0);
+        if (currentProbability > 1) {
           throw new Error('奖品概率不能超过1');
         }
         
@@ -120,14 +124,15 @@ const Prize = sequelize.define('Prize', {
         const existingPrizes = await Prize.findAll({
           where: { 
             activity_id: prize.activity_id,
-            id: { [Op.ne]: prize.id } // 排除当前正在更新的奖品
+            id: { [Op.ne]: prize.id }
           },
           transaction: options.transaction
         });
         
         const totalProbability = existingPrizes.reduce((sum, existingPrize) => {
-          return sum + parseFloat(existingPrize.probability);
-        }, 0) + parseFloat(prize.probability);
+          const p = parseFloat(existingPrize.probability || 0);
+          return sum + (isNaN(p) ? 0 : p);
+        }, 0) + (isNaN(currentProbability) ? 0 : currentProbability);
         
         if (totalProbability > 1) {
           throw new Error(`修改此奖品概率后，活动概率总和将超过1（当前总和：${totalProbability.toFixed(4)}）`);
@@ -143,19 +148,19 @@ Prize.prototype.hasStock = function() {
 };
 
 // 实例方法：扣减库存
-Prize.prototype.deductStock = async function(quantity = 1) {
+Prize.prototype.deductStock = async function(quantity = 1, options = {}) {
   if (this.remaining_quantity < quantity) {
     throw new Error('库存不足');
   }
   
   this.remaining_quantity -= quantity;
-  await this.save();
+  await this.save({ transaction: options.transaction });
   
   return this.remaining_quantity;
 };
 
 // 实例方法：恢复库存
-Prize.prototype.restoreStock = async function(quantity = 1) {
+Prize.prototype.restoreStock = async function(quantity = 1, options = {}) {
   const newQuantity = this.remaining_quantity + quantity;
   
   if (newQuantity > this.total_quantity) {
@@ -163,7 +168,7 @@ Prize.prototype.restoreStock = async function(quantity = 1) {
   }
   
   this.remaining_quantity = newQuantity;
-  await this.save();
+  await this.save({ transaction: options.transaction });
   
   return this.remaining_quantity;
 };
@@ -241,18 +246,54 @@ Prize.selectByProbability = async function(activityId, activity = null) {
     return prizes[prizes.length - 1];
   } else {
     // 概率模式：根据设置的概率选择奖品
-    // 计算累积概率
-    let totalProbability = 0;
-    const cumulativeProbabilities = prizes.map(prize => {
-      totalProbability += parseFloat(prize.probability);
-      return {
-        prize,
-        cumulativeProbability: totalProbability
-      };
+    // 先计算已设置的总概率与未设置（为0）的奖品
+    const explicitPrizes = [];
+    const zeroPrizes = [];
+    let explicitTotal = 0;
+    for (const prize of prizes) {
+      const p = parseFloat(prize.probability || 0);
+      if (p > 0) {
+        explicitPrizes.push({ prize, probability: p });
+        explicitTotal += p;
+      } else {
+        zeroPrizes.push(prize);
+      }
+    }
+    
+    // 如果总概率大于1，直接报错
+    if (explicitTotal > 1) {
+      throw new Error('活动奖品概率总和超过1');
+    }
+    
+    // 将剩余概率平分给概率为0的奖品
+    let effectiveEntries = [];
+    const remainder = 1 - explicitTotal;
+    if (zeroPrizes.length > 0 && remainder > 0) {
+      const share = remainder / zeroPrizes.length;
+      for (const prize of zeroPrizes) {
+        effectiveEntries.push({ prize, probability: share });
+      }
+    } else {
+      // 无剩余或无零概率奖品，不追加
+    }
+    effectiveEntries = effectiveEntries.concat(explicitPrizes);
+    
+    // 计算累积概率（基于0-1的随机数）
+    let cumulative = 0;
+    const cumulativeProbabilities = effectiveEntries.map(item => {
+      cumulative += item.probability;
+      return { prize: item.prize, cumulativeProbability: cumulative };
     });
     
-    // 生成随机数
-    const random = Math.random() * totalProbability;
+    const totalEffective = cumulative;
+    
+    // 生成[0,1)的随机数
+    const random = Math.random();
+    
+    // 如果随机数超过总有效概率，判定为未中奖
+    if (random > totalEffective) {
+      return null;
+    }
     
     // 根据随机数选择奖品
     for (const item of cumulativeProbabilities) {
@@ -261,8 +302,7 @@ Prize.selectByProbability = async function(activityId, activity = null) {
       }
     }
     
-    // 如果没有选中任何奖品，返回最后一个
-    return cumulativeProbabilities[cumulativeProbabilities.length - 1].prize;
+    return null;
   }
 };
 

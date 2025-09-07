@@ -173,6 +173,7 @@ const createApp = async () => {
   app.use('/lottery-codes', require('./routes/lotteryCode'));
   app.use('/webhook', require('./routes/webhook'));
   app.use('/system', require('./routes/system'));
+  app.use('/dashboard', require('./routes/dashboard'));
   
   // 健康检查
   app.get('/health', (req, res) => {

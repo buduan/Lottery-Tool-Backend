@@ -80,14 +80,14 @@ LotteryCode.prototype.isUsed = function() {
 };
 
 // 实例方法：标记为已使用
-LotteryCode.prototype.markAsUsed = async function() {
+LotteryCode.prototype.markAsUsed = async function(options = {}) {
   if (this.status === 'used') {
     throw new Error('抽奖码已经使用过了');
   }
   
   this.status = 'used';
   this.used_at = new Date();
-  await this.save();
+  await this.save({ transaction: options.transaction });
   
   return this;
 };

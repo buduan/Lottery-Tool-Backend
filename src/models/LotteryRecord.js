@@ -82,7 +82,7 @@ LotteryRecord.prototype.getLotteryType = function() {
 };
 
 // 类方法：创建抽奖记录
-LotteryRecord.createRecord = async function(data) {
+LotteryRecord.createRecord = async function(data, options = {}) {
   const {
     activity_id,
     lottery_code_id,
@@ -101,7 +101,7 @@ LotteryRecord.createRecord = async function(data) {
     operator_id,
     ip_address,
     user_agent
-  });
+  }, { transaction: options.transaction });
 };
 
 // 类方法：获取活动的抽奖记录

@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000/api",
+      "url": "http://localhost:3000",
       "description": "开发环境"
     }
   ],
@@ -597,6 +597,88 @@
           },
           "401": {
             "$ref": "#/components/responses/UnauthorizedError"
+          }
+        }
+      }
+    },
+    "/dashboard": {
+      "get": {
+        "tags": ["仪表盘模块"],
+        "summary": "获取仪表盘统计数据",
+        "description": "获取仪表盘统计数据，根据用户角色返回不同的数据",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "description": "超级管理员数据",
+                              "properties": {
+                                "totalActivities": {
+                                  "type": "integer",
+                                  "description": "总活动数"
+                                },
+                                "totalLotteryCodes": {
+                                  "type": "integer",
+                                  "description": "总抽奖码数"
+                                },
+                                "totalAdmins": {
+                                  "type": "integer",
+                                  "description": "总管理员数"
+                                },
+                                "totalLotteryRecords": {
+                                  "type": "integer",
+                                  "description": "总抽奖记录数"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "description": "管理员数据",
+                              "properties": {
+                                "userActivities": {
+                                  "type": "integer",
+                                  "description": "用户创建的活动数"
+                                },
+                                "userLotteryCodes": {
+                                  "type": "integer",
+                                  "description": "用户创建的抽奖码数"
+                                },
+                                "userLotteryRecords": {
+                                  "type": "integer",
+                                  "description": "用户相关的抽奖记录数"
+                                },
+                                "totalUsers": {
+                                  "type": "integer",
+                                  "description": "总用户数"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
           }
         }
       }
@@ -2887,6 +2969,89 @@
           }
         }
       }
+    },
+
+    "/dashboard": {
+      "get": {
+        "tags": ["仪表盘模块"],
+        "summary": "获取仪表盘统计数据",
+        "description": "根据用户角色返回不同的统计数据。超级管理员返回系统总体统计，管理员返回个人创建的数据统计。",
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "description": "超级管理员数据",
+                              "properties": {
+                                "totalActivities": {
+                                  "type": "integer",
+                                  "description": "系统中活动总数"
+                                },
+                                "totalLotteryCodes": {
+                                  "type": "integer",
+                                  "description": "系统中抽奖码总数"
+                                },
+                                "totalAdmins": {
+                                  "type": "integer",
+                                  "description": "系统中管理员总数"
+                                },
+                                "totalLotteryRecords": {
+                                  "type": "integer",
+                                  "description": "系统中抽奖记录总数"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "description": "管理员数据",
+                              "properties": {
+                                "userActivities": {
+                                  "type": "integer",
+                                  "description": "用户创建的活动总数"
+                                },
+                                "userLotteryCodes": {
+                                  "type": "integer",
+                                  "description": "用户创建的抽奖码总数"
+                                },
+                                "userLotteryRecords": {
+                                  "type": "integer",
+                                  "description": "用户创建的抽奖记录总数"
+                                },
+                                "totalUsers": {
+                                  "type": "integer",
+                                  "description": "系统中用户总数"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          }
+        }
+      }
     }
   },
   "tags": [
@@ -2921,6 +3086,10 @@
     {
       "name": "Webhook模块",
       "description": "Webhook相关接口"
+    },
+    {
+      "name": "仪表盘模块",
+      "description": "仪表盘统计数据相关接口"
     }
   ]
 }

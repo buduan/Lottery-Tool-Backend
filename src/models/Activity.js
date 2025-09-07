@@ -141,16 +141,19 @@ Activity.prototype.getStatistics = async function() {
   
   const [
     totalLotteryCodes,
+    usedLotteryCodes,
     totalRecords,
     totalWinners,
     prizes
   ] = await Promise.all([
     LotteryCode.count({ where: { activity_id: this.id } }),
+    LotteryCode.count({ where: { activity_id: this.id, status: 'used' } }),
     LotteryRecord.count({ where: { activity_id: this.id } }),
     LotteryRecord.count({ where: { activity_id: this.id, is_winner: true } }),
     Prize.findAll({ where: { activity_id: this.id } })
   ]);
   
+  const remainingLotteryCodes = totalLotteryCodes - usedLotteryCodes;
   const winRate = totalRecords > 0 ? ((totalWinners / totalRecords) * 100).toFixed(2) : '0.00';
   
   const prizeStatistics = prizes.map(prize => ({
@@ -164,6 +167,9 @@ Activity.prototype.getStatistics = async function() {
   }));
   
   return {
+    lottery_codes_count: totalLotteryCodes,
+    remaining_lottery_codes: remainingLotteryCodes,
+    used_lottery_codes: usedLotteryCodes,
     total_lottery_codes: totalLotteryCodes,
     total_lottery_records: totalRecords,
     total_winners: totalWinners,
@@ -211,8 +217,32 @@ Activity.findByCreator = async function(userId, options = {}) {
     offset: parseInt(offset)
   });
   
+  // 为每个活动添加抽奖码统计信息
+  const LotteryCode = require('./LotteryCode');
+  const activitiesWithStats = await Promise.all(
+    rows.map(async (activity) => {
+      const activityData = activity.toJSON();
+      
+      const [
+        totalLotteryCodes,
+        usedLotteryCodes
+      ] = await Promise.all([
+        LotteryCode.count({ where: { activity_id: activity.id } }),
+        LotteryCode.count({ where: { activity_id: activity.id, status: 'used' } })
+      ]);
+      
+      const remainingLotteryCodes = totalLotteryCodes - usedLotteryCodes;
+      
+      activityData.lottery_codes_count = totalLotteryCodes;
+      activityData.remaining_lottery_codes = remainingLotteryCodes;
+      activityData.used_lottery_codes = usedLotteryCodes;
+      
+      return activityData;
+    })
+  );
+  
   return {
-    activities: rows,
+    activities: activitiesWithStats,
     pagination: {
       total: count,
       page: parseInt(page),

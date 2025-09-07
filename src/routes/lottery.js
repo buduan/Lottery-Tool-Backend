@@ -105,9 +105,15 @@ async (req, res, next) => {
     }
 
     // 查找抽奖码
-    const lotteryCodeRecord = await LotteryCode.findByActivityAndCode(activityId, lottery_code);
+    const lotteryCodeRecord = await LotteryCode.findByActivityAndCode(
+      activityId,
+      lottery_code
+    );
     if (!lotteryCodeRecord) {
-      throw createError('BUSINESS_LOTTERY_CODE_NOT_FOUND', '抽奖码不存在或不属于此活动');
+      throw createError(
+        'BUSINESS_LOTTERY_CODE_NOT_FOUND',
+        '抽奖码不存在或不属于此活动'
+      );
     }
 
     // 检查抽奖码是否已使用
@@ -129,21 +135,24 @@ async (req, res, next) => {
     let isWinner = false;
     let selectedPrize = null;
 
-    // 根据概率选择奖品
+    // 根据概率选择奖品（内部会处理总和>1抛错，总和<1可能未中奖）
     const selectedPrizeRecord = await Prize.selectByProbability(activityId, activity);
     
     if (selectedPrizeRecord && selectedPrizeRecord.hasStock()) {
       isWinner = true;
       selectedPrize = selectedPrizeRecord;
       
-      // 扣减库存
-      await selectedPrize.deductStock(1);
+      // 扣减库存（在事务中）
+      await selectedPrize.deductStock(1, { transaction });
+    } else {
+      isWinner = false;
+      selectedPrize = null;
     }
 
-    // 标记抽奖码为已使用
-    await lotteryCodeRecord.markAsUsed();
+    // 标记抽奖码为已使用（在事务中）
+    await lotteryCodeRecord.markAsUsed({ transaction });
 
-    // 创建抽奖记录
+    // 创建抽奖记录（在事务中）
     const lotteryRecord = await LotteryRecord.createRecord({
       activity_id: activityId,
       lottery_code_id: lotteryCodeRecord.id,
@@ -151,7 +160,7 @@ async (req, res, next) => {
       is_winner: isWinner,
       ip_address: req.ip,
       user_agent: req.get('User-Agent')
-    });
+    }, { transaction });
 
     await transaction.commit();
 
@@ -226,9 +235,15 @@ async (req, res, next) => {
     }
 
     // 查找抽奖码
-    const lotteryCodeRecord = await LotteryCode.findByActivityAndCode(activityId, lottery_code);
+    const lotteryCodeRecord = await LotteryCode.findByActivityAndCode(
+      activityId,
+      lottery_code
+    );
     if (!lotteryCodeRecord) {
-      throw createError('BUSINESS_LOTTERY_CODE_NOT_FOUND', '抽奖码不存在或不属于此活动');
+      throw createError(
+        'BUSINESS_LOTTERY_CODE_NOT_FOUND',
+        '抽奖码不存在或不属于此活动'
+      );
     }
 
     // 检查抽奖码是否已使用
@@ -262,7 +277,7 @@ async (req, res, next) => {
 
       isWinner = true;
       selectedPrize = prize;
-      await selectedPrize.deductStock(1);
+      await selectedPrize.deductStock(1, { transaction });
     } else {
       // 使用概率抽奖
       const selectedPrizeRecord = await Prize.selectByProbability(activityId, activity);
@@ -270,12 +285,15 @@ async (req, res, next) => {
       if (selectedPrizeRecord && selectedPrizeRecord.hasStock()) {
         isWinner = true;
         selectedPrize = selectedPrizeRecord;
-        await selectedPrize.deductStock(1);
+        await selectedPrize.deductStock(1, { transaction });
+      } else {
+        isWinner = false;
+        selectedPrize = null;
       }
     }
 
     // 标记抽奖码为已使用
-    await lotteryCodeRecord.markAsUsed();
+    await lotteryCodeRecord.markAsUsed({ transaction });
 
     // 创建抽奖记录
     const lotteryRecord = await LotteryRecord.createRecord({
@@ -286,7 +304,7 @@ async (req, res, next) => {
       operator_id: req.user.id,
       ip_address: req.ip,
       user_agent: req.get('User-Agent')
-    });
+    }, { transaction });
 
     await transaction.commit();
 
@@ -314,7 +332,7 @@ async (req, res, next) => {
     res.json({
       success: true,
       data: responseData,
-      message: isWinner ? '抽奖成功，参与者中奖！' : '抽奖成功，参与者未中奖'
+      message: isWinner ? '抽奖成功，参与者中奖！' : '很遗憾未中奖'
     });
   } catch (error) {
     await transaction.rollback();
