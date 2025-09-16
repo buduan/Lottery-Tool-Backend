@@ -277,7 +277,7 @@ Prize.selectByProbability = async function(activityId, activity = null) {
         effectiveEntries.push({ prize, probability: remainder * weight });
       }
       } else {
-      // 所有零概率奖品都无库存，理论不会出现
+      // 无剩余或零概率奖品，不追加
       }
     }
     effectiveEntries = effectiveEntries.concat(explicitPrizes);
