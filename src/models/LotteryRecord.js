@@ -112,6 +112,7 @@ LotteryRecord.findByActivity = async function(activityId, options = {}) {
     winner_only = false,
     participant_name,
     lottery_code,
+    keyword,
     start_date,
     end_date
   } = options;
@@ -150,6 +151,11 @@ LotteryRecord.findByActivity = async function(activityId, options = {}) {
       model: require('./Activity'),
       as: 'activity',
       required: true
+    },
+    {
+      model: require('./User'),
+      as: 'operator',
+      required: false
     }
   ];
   
@@ -165,6 +171,19 @@ LotteryRecord.findByActivity = async function(activityId, options = {}) {
     include[0].where = {
       ...(include[0].where || {}),
       code: { [Op.like]: `%${lottery_code}%` }
+    };
+  }
+  
+  // 如果有关键词搜索，添加条件
+  if (keyword) {
+    include[0].where = {
+      ...(include[0].where || {}),
+      [Op.or]: [
+        { code: { [Op.like]: `%${keyword}%` } },
+        sequelize.literal(`JSON_EXTRACT(participant_info, '$.name') LIKE '%${keyword}%'`),
+        sequelize.literal(`JSON_EXTRACT(participant_info, '$.phone') LIKE '%${keyword}%'`),
+        sequelize.literal(`JSON_EXTRACT(participant_info, '$.email') LIKE '%${keyword}%'`)
+      ]
     };
   }
   
@@ -320,4 +339,4 @@ LotteryRecord.hasDrawn = async function(lotteryCodeId) {
   return !!record;
 };
 
-module.exports = LotteryRecord; 
+module.exports = LotteryRecord;

@@ -2111,6 +2111,137 @@
         }
       }
     },
+    "/admin/activities/{id}/records": {
+      "get": {
+        "tags": ["管理员模块 - 活动管理"],
+        "summary": "获取活动抽奖记录列表",
+        "description": "获取指定活动的抽奖记录列表",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "活动ID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "页码",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "每页数量",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 10
+            }
+          },
+          {
+            "name": "keyword",
+            "in": "query",
+            "description": "搜索关键词（抽奖码、参与者姓名、邮箱、手机号）",
+            "schema": {
+              "type": "string",
+              "maxLength": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "获取成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/ApiResponse"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "records": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "description": "抽奖记录ID"
+                                  },
+                                  "lottery_code": {
+                                    "type": "string",
+                                    "description": "抽奖码"
+                                  },
+                                  "participant_name": {
+                                    "type": "string",
+                                    "description": "抽奖人姓名"
+                                  },
+                                  "participant_email": {
+                                    "type": "string",
+                                    "description": "抽奖人邮箱"
+                                  },
+                                  "participant_phone": {
+                                    "type": "string",
+                                    "description": "抽奖人手机号"
+                                  },
+                                  "is_winner": {
+                                    "type": "boolean",
+                                    "description": "是否中奖"
+                                  },
+                                  "prize_name": {
+                                    "type": "string",
+                                    "description": "奖品名称（中奖时显示）"
+                                  },
+                                  "created_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "抽奖时间"
+                                  },
+                                  "operator_name": {
+                                    "type": "string",
+                                    "description": "抽奖发起人姓名"
+                                  }
+                                }
+                              }
+                            },
+                            "pagination": {
+                              "$ref": "#/components/schemas/Pagination"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "403": {
+            "$ref": "#/components/responses/ForbiddenError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          }
+        }
+      }
+    },
     "/admin/activities/{id}/prizes": {
       "get": {
         "tags": ["管理员模块 - 活动管理"],

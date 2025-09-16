@@ -8,6 +8,7 @@ const { generateBatchLotteryCodes, validateLotteryCodeFormat } = require('../../
 const Activity = require('../../models/Activity');
 const Prize = require('../../models/Prize');
 const LotteryCode = require('../../models/LotteryCode');
+const LotteryRecord = require('../../models/LotteryRecord');
 const OperationLog = require('../../models/OperationLog');
 
 // 验证请求参数的中间件
@@ -728,6 +729,48 @@ async (req, res, next) => {
           invalidated_codes: invalidatedCodes
         }
       }
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * @route   GET /api/admin/activities/:id/records
+ * @desc    获取指定活动的抽奖记录列表
+ * @access  Private (Admin)
+ */
+router.get('/:id/records', [
+  query('page').optional().isInt({ min: 1 }).withMessage('页码必须是正整数'),
+  query('limit').optional().isInt({ min: 1, max: 100 }).withMessage('每页数量必须是1-100的整数'),
+  query('keyword').optional().isLength({ max: 100 }).withMessage('搜索关键词不能超过100个字符')
+], 
+validateRequest,
+async (req, res, next) => {
+  try {
+    const activityId = req.params.id;
+    const { page = 1, limit = 20, keyword } = req.query;
+
+    // 验证活动存在且有权限
+    const activity = await Activity.findByPk(activityId);
+    if (!activity) {
+      throw createError('BUSINESS_ACTIVITY_NOT_FOUND');
+    }
+
+    if (req.user.role !== 'super_admin' && activity.created_by !== req.user.id) {
+      throw createError('AUTH_INSUFFICIENT_PERMISSION', '只能查看自己创建的活动');
+    }
+
+    // 获取抽奖记录列表
+    const result = await LotteryRecord.findByActivity(activityId, {
+      page,
+      limit,
+      keyword
+    });
+
+    res.json({
+      success: true,
+      data: result
     });
   } catch (error) {
     next(error);
