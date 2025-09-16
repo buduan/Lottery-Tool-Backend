@@ -253,55 +253,59 @@ Prize.selectByProbability = async function(activityId, activity = null) {
     for (const prize of prizes) {
       const p = parseFloat(prize.probability || 0);
       if (p > 0) {
-        explicitPrizes.push({ prize, probability: p });
-        explicitTotal += p;
+      explicitPrizes.push({ prize, probability: p });
+      explicitTotal += p;
       } else {
-        zeroPrizes.push(prize);
+      zeroPrizes.push(prize);
       }
     }
-    
+
     // 如果总概率大于1，直接报错
     if (explicitTotal > 1) {
       throw new Error('活动奖品概率总和超过1');
     }
-    
-    // 将剩余概率平分给概率为0的奖品
+
     let effectiveEntries = [];
     const remainder = 1 - explicitTotal;
+
     if (zeroPrizes.length > 0 && remainder > 0) {
-      const share = remainder / zeroPrizes.length;
+      // 平分剩余概率时，按剩余库存权重分配
+      const totalStock = zeroPrizes.reduce((sum, prize) => sum + prize.remaining_quantity, 0);
+      if (totalStock > 0) {
       for (const prize of zeroPrizes) {
-        effectiveEntries.push({ prize, probability: share });
+        const weight = prize.remaining_quantity / totalStock;
+        effectiveEntries.push({ prize, probability: remainder * weight });
       }
-    } else {
-      // 无剩余或无零概率奖品，不追加
+      } else {
+      // 无剩余或零概率奖品，不追加
+      }
     }
     effectiveEntries = effectiveEntries.concat(explicitPrizes);
-    
+
     // 计算累积概率（基于0-1的随机数）
     let cumulative = 0;
     const cumulativeProbabilities = effectiveEntries.map(item => {
       cumulative += item.probability;
       return { prize: item.prize, cumulativeProbability: cumulative };
     });
-    
+
     const totalEffective = cumulative;
-    
+
     // 生成[0,1)的随机数
     const random = Math.random();
-    
+
     // 如果随机数超过总有效概率，判定为未中奖
     if (random > totalEffective) {
       return null;
     }
-    
+
     // 根据随机数选择奖品
     for (const item of cumulativeProbabilities) {
       if (random <= item.cumulativeProbability) {
-        return item.prize;
+      return item.prize;
       }
     }
-    
+
     return null;
   }
 };
