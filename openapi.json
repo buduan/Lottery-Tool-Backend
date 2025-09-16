@@ -2182,38 +2182,62 @@
                                     "type": "integer",
                                     "description": "抽奖记录ID"
                                   },
-                                  "lottery_code": {
-                                    "type": "string",
-                                    "description": "抽奖码"
+                                  "activity_id": {
+                                    "type": "integer",
+                                    "description": "活动ID"
                                   },
-                                  "participant_name": {
-                                    "type": "string",
-                                    "description": "抽奖人姓名"
+                                  "lottery_code_id": {
+                                    "type": "integer",
+                                    "description": "抽奖码ID"
                                   },
-                                  "participant_email": {
-                                    "type": "string",
-                                    "description": "抽奖人邮箱"
-                                  },
-                                  "participant_phone": {
-                                    "type": "string",
-                                    "description": "抽奖人手机号"
+                                  "prize_id": {
+                                    "type": "integer",
+                                    "description": "奖品ID"
                                   },
                                   "is_winner": {
                                     "type": "boolean",
                                     "description": "是否中奖"
                                   },
-                                  "prize_name": {
+                                  "operator_id": {
+                                    "type": "integer",
+                                    "description": "操作员ID"
+                                  },
+                                  "ip_address": {
                                     "type": "string",
-                                    "description": "奖品名称（中奖时显示）"
+                                    "description": "IP地址"
+                                  },
+                                  "user_agent": {
+                                    "type": "string",
+                                    "description": "用户代理"
                                   },
                                   "created_at": {
                                     "type": "string",
                                     "format": "date-time",
                                     "description": "抽奖时间"
                                   },
-                                  "operator_name": {
+                                  "lotteryCode": {
                                     "type": "string",
-                                    "description": "抽奖发起人姓名"
+                                    "description": "抽奖码"
+                                  },
+                                  "phone": {
+                                    "type": "string",
+                                    "description": "手机号"
+                                  },
+                                  "email": {
+                                    "type": "string",
+                                    "description": "邮箱"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "抽奖码对应的姓名"
+                                  },
+                                  "prize": {
+                                    "type": "string",
+                                    "description": "奖品名称"
+                                  },
+                                  "operator": {
+                                    "type": "string",
+                                    "description": "操作员用户名"
                                   }
                                 }
                               }

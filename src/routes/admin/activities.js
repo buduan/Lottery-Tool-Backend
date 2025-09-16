@@ -768,9 +768,43 @@ async (req, res, next) => {
       keyword
     });
 
+    // 精简返回数据结构
+    const simplifiedRecords = result.records.map(record => {
+      const simplified = {
+        id: record.id,
+        activity_id: record.activity_id,
+        lottery_code_id: record.lottery_code_id,
+        prize_id: record.prize_id,
+        is_winner: record.is_winner,
+        operator_id: record.operator_id,
+        ip_address: record.ip_address,
+        user_agent: record.user_agent,
+        created_at: record.created_at,
+        lotteryCode: record.lotteryCode?.code,
+        prize: record.prize?.name,
+        operator: record.operator?.username
+      };
+
+      // 只有存在时才添加这些字段
+      if (record.lotteryCode?.phone) {
+        simplified.phone = record.lotteryCode.phone;
+      }
+      if (record.lotteryCode?.email) {
+        simplified.email = record.lotteryCode.email;
+      }
+      if (record.lotteryCode?.participant_name) {
+        simplified.name = record.lotteryCode.participant_name;
+      }
+
+      return simplified;
+    });
+
     res.json({
       success: true,
-      data: result
+      data: {
+        records: simplifiedRecords,
+        pagination: result.pagination
+      }
     });
   } catch (error) {
     next(error);
